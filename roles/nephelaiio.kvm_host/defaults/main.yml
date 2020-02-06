@@ -1,0 +1,12 @@
+---
+kvm_iptables_savefile: /etc/iptables/iptables.rules
+kvm_requirement_packages:
+  - qemu
+  - qemu-kvm
+  - libvirt-bin
+  - python-libvirt
+  - bridge-utils
+  - ebtables
+  - dmidecode
+  - python-lxml
+  - iptables-persistent

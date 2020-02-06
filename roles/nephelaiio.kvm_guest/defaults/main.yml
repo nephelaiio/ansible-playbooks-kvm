@@ -1,0 +1,80 @@
+---
+# required kvm target host for guest
+# kvm_host: localhost
+kvm_image_default: bionic
+kvm_profile_default: medium
+
+kvm_guest_name: "{{ inventory_hostname }}"
+kvm_guest_user: ansible
+
+kvm_networks:
+  local:
+    network: 192.168.254.0
+    netmask: 255.255.255.0
+    router: 192.168.254.1
+    zone: 254.168.192.in-addr.arpa
+    bridge: br0
+    ns:
+      - 1.1.1.1
+      - 8.8.8.8
+
+kvm_images:
+  bionic:
+    url: https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.img
+    pool: default
+    format: qcow2
+    netconf_ver: 2
+  xenial:
+    url: https://cloud-images.ubuntu.com/xenial/current/xenial-server-cloudimg-amd64-disk1.img
+    pool: default
+    format: qcow2
+    netconf_ver: 2
+  centos7:
+    url: https://cloud.centos.org/centos/7/images/CentOS-7-x86_64-GenericCloud-1901.qcow2.xz
+    pool: default
+    format: qcow2
+    netconf_ver: 1
+  centos8:
+    url: https://cloud.centos.org/centos/8/x86_64/images/CentOS-8-GenericCloud-8.1.1911-20200113.3.x86_64.qcow2
+    pool: default
+    format: qcow2
+    netconf_ver: 2
+    package_manager: yum
+
+kvm_profiles:
+  small:
+    state: present  # | recreate | absent
+    memory: 2048
+    cpu: 2
+    image: xenial
+    autostart: True
+    size: 10G
+    pool: default
+    dhcp: false
+    network: ovirt
+  medium:
+    state: present  # | recreate | absent
+    memory: 4096
+    cpu: 2
+    image: xenial
+    autostart: True
+    size: 20G
+    pool: default
+    dhcp: false
+    network: ovirt
+  large:
+    state: present  # | recreate | absent
+    memory: 8192
+    cpu: 4
+    image: xenial
+    autostart: True
+    size: 30G
+    pool: default
+    dhcp: false
+    network: ovirt
+
+kvm_pools:
+  default:
+    path: /var/lib/libvirt/images
+    state: present
+    autostart: True

@@ -1,0 +1,47 @@
+---
+- name: install bridging package
+  package:
+    name: bridge-utils
+
+- name: configure bridging
+  sysctl:
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+    state: present
+    sysctl_set: yes
+    reload: yes
+  loop_control:
+    label: "{{ item.name }}"
+  with_items:
+    - name: net.ipv4.ip_forward
+      value: 1
+
+- name: install package requirements
+  package:
+    name: "{{ kvm_requirement_packages }}"
+    update_cache: yes
+
+- name: initialize iptables configuration
+  file:
+    path: "{{ kvm_iptables_savefile }}"
+    state: touch
+
+- meta: flush_handlers
+
+- name: allow iptables forward chain
+  iptables:
+    chain: FORWARD
+    policy: ACCEPT
+
+- name: save iptables configuration
+  shell: "iptables-save > {{ kvm_iptables_savefile }}"
+
+- name: install requirements
+  package:
+    name: "{{ kvm_requirement_packages }}"
+
+- name: start libvirtd
+  service:
+    name: libvirtd
+    state: started
+    enabled: yes

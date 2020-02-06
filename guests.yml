@@ -1,0 +1,18 @@
+---
+- name: Create kvm guests
+
+  hosts: kvm_guests
+
+  become: yes
+
+  gather_facts: no
+
+  roles:
+
+    - nephelaiio.plugins
+    - nephelaiio.kvm_guest
+
+  vars:
+
+    kvm_guest_password: "{{ kvm_guest_pass }}"
+    kvm_guest_ssh_key: "{{ kvm_guest_pubkey }}"
