@@ -30,6 +30,7 @@ The following parameters are available/required for playbook invocation
 | *yes* (1)__ | kvm_networks    | global list of networks availeble for guest placement | see [roles/nephelaiio.kvm_guest/defaults/main.yml](roles/nephelaiio.kvm_guest/defaults/main.yml) |
 | *yes* (1)__ | kvm_network     | network for particular guest placement                | see [roles/nephelaiio.kvm_guest/defaults/main.yml](roles/nephelaiio.kvm_guest/defaults/main.yml) |
 | no _        | ansible_host    | guest address                                         | N/A (must be set to static ip or kvm_dhcp='yes' is required)                                     |
+| no _        | kvm_host        | kvm host to place guest                               | localhost                                                                                        |
 | no          | kvm_dhcp        | dhcp assignment for particular guest                  | no (must be set to true or ansible_host=<static ip> is required)                                 |
 | no          | kvm_base_domain | base domain for kvm guests save                       | domain name from `inventory_hostname`                                                            |
 | no          | kvm_profiles    | hardware profiles for kvm guests                      | see [roles/nephelaiio.kvm_guest/defaults/main.yml](roles/nephelaiio.kvm_guest/defaults/main.yml) |
