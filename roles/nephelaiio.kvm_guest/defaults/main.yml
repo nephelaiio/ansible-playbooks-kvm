@@ -52,7 +52,7 @@ kvm_profiles:
     autostart: True
     size: 10G
     pool: default
-    dhcp: false
+    dhcp: "{{ kvm_dhcp | default('no') }}"
     network: "{{ kvm_network | default('local') }}"
   medium:
     state: present  # | recreate | absent
@@ -62,7 +62,7 @@ kvm_profiles:
     autostart: True
     size: 20G
     pool: default
-    dhcp: false
+    dhcp: "{{ kvm_dhcp | default('no') }}"
     network: "{{ kvm_network | default('local') }}"
   large:
     state: present  # | recreate | absent
@@ -72,7 +72,7 @@ kvm_profiles:
     autostart: True
     size: 30G
     pool: default
-    dhcp: false
+    dhcp: "{{ kvm_dhcp | default('no') }}"
     network: "{{ kvm_network | default('local') }}"
 
 kvm_pools:
