@@ -4,7 +4,9 @@
 kvm_image_default: bionic
 kvm_profile_default: medium
 
+kvm_host: localhost
 kvm_guest_name: "{{ inventory_hostname }}"
+kvm_base_domain: "{{ kvm_guest_name | split_with('.') | tail | join('.') }}"
 kvm_guest_user: ansible
 
 kvm_networks:
@@ -51,7 +53,7 @@ kvm_profiles:
     size: 10G
     pool: default
     dhcp: false
-    network: ovirt
+    network: "{{ kvm_network | default('local') }}"
   medium:
     state: present  # | recreate | absent
     memory: 4096
@@ -61,7 +63,7 @@ kvm_profiles:
     size: 20G
     pool: default
     dhcp: false
-    network: ovirt
+    network: "{{ kvm_network | default('local') }}"
   large:
     state: present  # | recreate | absent
     memory: 8192
@@ -71,7 +73,7 @@ kvm_profiles:
     size: 30G
     pool: default
     dhcp: false
-    network: ovirt
+    network: "{{ kvm_network | default('local') }}"
 
 kvm_pools:
   default:
