@@ -140,7 +140,7 @@
             dest: "{{ tmpdir.path }}/user-data"
           vars:
             ssh_user: "{{ kvm_guest_user }}"
-            ssh_pass: "{{ kvm_guest_pass | password_hash('sha512') }}"
+            ssh_pass: "{{ kvm_guest_pass | string | password_hash('sha512') }}"
             ssh_key: "{{ kvm_guest_pubkey }}"
             hostname: "{{ kvm_guest_name }}"
             fqdn: "{{ kvm_guest_name }}"
