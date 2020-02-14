@@ -63,8 +63,7 @@ pushd $tmpdir
 if [ -f ../requirements.yml ]; then
     ansible-galaxy install -r requirements.yml --force
 fi
-ansible-playbook -i install guests.yml ${POSITIONAL[@]}
-#ansible-playbook -i install hosts.yml ${POSITIONAL[@]}
+ansible-playbook -i install hosts.yml ${POSITIONAL[@]}
 popd
 
 # purge temp files
