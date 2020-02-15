@@ -1,10 +1,9 @@
 #cloud-config
 packages:
-  - python
   - python3
-  - nfs-utils
-  - python-pip
   - python3-pip
+  - python3-dnf
+  - nfs-utils
 {% if epel_mirror_host is not defined or epel_mirror_host == '' %}
   - epel-release
 {% endif %}

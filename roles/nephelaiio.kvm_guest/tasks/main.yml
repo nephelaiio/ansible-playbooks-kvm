@@ -200,7 +200,7 @@
           when:
             - img.netconf_ver | int == 1
             - diskcopy.changed
-            - not kvm_profile.dhcp
+            - not (kvm_profile.dhcp | bool)
           become: no
 
         - name: create vm centos cloud image static network config
@@ -208,7 +208,7 @@
           when:
             - img.netconf_ver | int == 1
             - diskcopy.changed
-            - kvm_profile.dhcp
+            - kvm_profile.dhcp | bool
           become: no
 
         - name: create vm cloud image meta data

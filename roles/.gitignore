@@ -1,5 +1,4 @@
 *
 !.gitignore
-!nephelaiio.consul/
-!nephelaiio.consul_service/
-!nephelaiio.traefik/
+!nephelaiio.kvm_guest/
+!nephelaiio.kvm_host/
