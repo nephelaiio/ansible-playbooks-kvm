@@ -171,7 +171,7 @@
                   nameservers:
                     search:
                       - {{ kvm_base_domain }}
-                    addresses: {{ (nameservers | default(network_profile.ns)) | to_yaml }}
+                    addresses: {{ (kvm_nameservers | default(network_profile.ns)) | to_yaml }}
           when:
             - img.netconf_ver | int == 2
             - diskcopy.changed
@@ -194,7 +194,7 @@
                     - type: static
                       address: {{ kvm_profile.ansible_host }}/24
                       gateway: {{ network_profile.router }}
-                      dns_nameservers: {{ (nameservers | default(network_profile.ns)) | to_yaml }}
+                      dns_nameservers: {{ (kvm_nameservers | default(network_profile.ns)) | to_yaml }}
                       dns_search:
                         - {{ kvm_base_domain }}
           when:
