@@ -7,8 +7,8 @@ packages:
 {% if epel_mirror_host is not defined or epel_mirror_host == '' %}
   - epel-release
 {% endif %}
-package_update: false
-package_upgrade: false
+package_update: true
+package_upgrade: true
 package_reboot_if_required: true
 disable_root: true
 users:
