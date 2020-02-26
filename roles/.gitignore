@@ -1,4 +1,4 @@
 !.gitignore
-!nephelaiio.kvm_guest/*
-!nephelaiio.kvm_host/*
+!nephelaiio.kvm_guest/
+!nephelaiio.kvm_host/
 *
