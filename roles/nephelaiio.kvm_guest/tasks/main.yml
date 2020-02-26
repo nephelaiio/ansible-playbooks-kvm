@@ -287,6 +287,41 @@
     - ansible_host is defined
   delegate_to: "{{ kvm_host }}"
 
+- block:
+
+    - name: wait for vm startup
+      wait_for_connection:
+        delay: 10
+        sleep: 10
+        connect_timeout: 60
+
+    - name: create missing mountpoint destinations
+      file:
+        state: directory
+        path: "{{ item.path }}"
+        owner: "{{ item.owner | default(omit) }}"
+        group: "{{ item.group | default(omit) }}"
+        mode: "{{ item.mode | default(omit) }}"
+      loop_control:
+        label: "{{ item.path }}"
+      loop: "{{ kvm_mounts }}"
+
+    - name: define extra mountpoints
+      mount:
+        path: "{{ item.path }}"
+        src: "{{ item.source }}"
+        fstype: "{{ item.fstype }}"
+        opts: auto
+        state: "{{ item.state | default('mounted') }}"
+      loop_control:
+        label: "{{ item.path }}"
+      loop: "{{ kvm_mounts }}"
+
+  when:
+    - kvm_state | default(kvm_profile.state) in ['present', 'recreate', 'running']
+    - inventory_hostname is defined
+    - kvm_mounts is defined
+
 - name: delete image temp directory
   file:
     path: "{{ img_dir.path }}"
