@@ -291,9 +291,9 @@
 
     - name: wait for vm startup
       wait_for_connection:
-        delay: 10
+        delay: 300
         sleep: 10
-        connect_timeout: 60
+        connect_timeout: 360
 
     - name: create missing mountpoint destinations
       file:
