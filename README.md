@@ -25,16 +25,19 @@ The following parameters are available/required for playbook invocation
 
 ### [guests.yml](guests.yml):
 
-| required    | variable        | description                                           | default                                                                                          |
-| ---         | ---             | ---                                                   | ---                                                                                              |
-| *yes* (1)__ | kvm_networks    | global list of networks availeble for guest placement | see [roles/nephelaiio.kvm_guest/defaults/main.yml](roles/nephelaiio.kvm_guest/defaults/main.yml) |
-| *yes* (1)__ | kvm_network     | network for particular guest placement                | see [roles/nephelaiio.kvm_guest/defaults/main.yml](roles/nephelaiio.kvm_guest/defaults/main.yml) |
-| no          | ansible_host    | guest address                                         | N/A (must be set to static ip or kvm_dhcp='yes' is required)                                     |
-| no          | kvm_host        | kvm host to place guest                               | localhost                                                                                        |
-| no          | kvm_dhcp        | dhcp assignment for particular guest                  | no (must be set to true or ansible_host=<static ip> is required)                                 |
-| no          | kvm_mounts      | extra mount locations for kvm guest                   | N/A                                                                                             |
-| no          | kvm_base_domain | base domain for kvm guests save                       | domain name from `inventory_hostname`                                                            |
-| no          | kvm_profiles    | hardware profiles for kvm guests                      | see [roles/nephelaiio.kvm_guest/defaults/main.yml](roles/nephelaiio.kvm_guest/defaults/main.yml) |
+| required  | variable         | description                                           | default                                                                                          |
+| ---       | ---              | ---                                                   | ---                                                                                              |
+| *yes* (1) | kvm_networks     | global list of networks availeble for guest placement | see [roles/nephelaiio.kvm_guest/defaults/main.yml](roles/nephelaiio.kvm_guest/defaults/main.yml) |
+| *yes* (1) | kvm_network      | network for particular guest placement                | see [roles/nephelaiio.kvm_guest/defaults/main.yml](roles/nephelaiio.kvm_guest/defaults/main.yml) |
+| no        | ansible_host     | guest address                                         | N/A (must be set to static ip or kvm_dhcp='yes' is required)                                     |
+| no        | kvm_guest_user   | local user to provision in guest                      | ansible                                                                                          |
+| *yes*     | kvm_guest_pass   | local user password                                   | N/A                                                                                              |
+| *yes*     | kvm_guest_pubkey | ssh public key for kvm_guest_user                     | N/A                                                                                              |
+| no        | kvm_host         | kvm host to place guest                               | localhost                                                                                        |
+| no        | kvm_dhcp         | dhcp assignment for particular guest                  | no (must be set to true or ansible_host=<static ip> is required)                                 |
+| no        | kvm_mounts       | extra mount locations for kvm guest                   | N/A                                                                                              |
+| no        | kvm_base_domain  | base domain for kvm guests save                       | domain name from `inventory_hostname`                                                            |
+| no        | kvm_profiles     | hardware profiles for kvm guests                      | see [roles/nephelaiio.kvm_guest/defaults/main.yml](roles/nephelaiio.kvm_guest/defaults/main.yml) |
 
 (1) defaults are provided for local demo purposes. I.e set up br0 with a dummy interface
 
