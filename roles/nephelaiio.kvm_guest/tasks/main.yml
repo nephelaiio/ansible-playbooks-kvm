@@ -294,6 +294,7 @@
         delay: 300
         sleep: 10
         connect_timeout: 360
+      when: vmcreate.changed
 
     - name: create missing mountpoint destinations
       file:
